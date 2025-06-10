@@ -1,0 +1,22 @@
+{
+    "type": "static",
+    "listeners": [
+      {
+        "name": "duck-sse",
+        "protocol": "MCP",
+        "sse": { "address": "[::]", "port": 5001 }
+      }
+    ],
+    "targets": {
+      "mcp": [
+        {
+          "name": "duckduckgo",
+          "stdio": {
+            "cmd": "python",
+            "args": ["-m", "duckduckgo_mcp_server.server"]
+          }
+        }
+      ]
+    }
+  }
+  

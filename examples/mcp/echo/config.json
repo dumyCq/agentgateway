@@ -1,0 +1,29 @@
+{
+    "type": "static",
+    "listeners": [
+      {
+        "name": "echo-sse",
+        "protocol": "MCP",
+        "sse": { "address": "[::]", "port": 5002 }
+      }
+    ],
+    "targets": {
+      "mcp": [
+        {
+          "name": "echo",
+          "stdio": {
+            "cmd": "uvx",
+            "args": [
+              "fastmcp",
+              "run",
+              "/Users/qi.chang/Library/CloudStorage/OneDrive-Accenture/Documents/AI_Refinery/Repo_local/agentgateway/examples/mcp/echo/echo_mcp_server.py:mcp"
+            ],
+            "env": {
+              "PYTHONUNBUFFERED": "1"
+            }
+          }
+        }
+      ]
+    }
+  }
+  
