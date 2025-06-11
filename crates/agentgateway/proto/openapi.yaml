@@ -252,6 +252,9 @@ components:
         stdio:
           $ref: '#/components/schemas/StdioTarget'
           description: Stdio target configuration.
+        mcp_proxy:
+          $ref: '#/components/schemas/McpProxyTarget'
+          description: MCP Proxy target configuration.
 
     A2aTarget:
       type: object
@@ -565,3 +568,18 @@ components:
           type: string
           enum: [allow, deny]
           description: The action to take.
+
+    McpProxyTarget:
+      type: object
+      required:
+        - cmd
+        - args
+      properties:
+        cmd:
+          type: string
+          description: The command of the mcp-proxy.
+        args:
+          type: array
+          items:
+            type: string
+          description: The arguments for the command to be run by mcp-proxy.

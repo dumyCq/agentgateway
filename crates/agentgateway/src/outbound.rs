@@ -87,12 +87,14 @@ pub enum McpTargetSpec {
 	Sse(SseTargetSpec),
 	Stdio {
 		cmd: String,
-		#[serde(skip_serializing_if = "Vec::is_empty")]
 		args: Vec<String>,
-		#[serde(skip_serializing_if = "HashMap::is_empty")]
 		env: HashMap<String, String>,
 	},
 	OpenAPI(OpenAPITarget),
+	McpProxy {
+		cmd: String,
+		args: Vec<String>,
+	},
 }
 
 impl TryFrom<XdsTarget> for McpTargetSpec {
@@ -107,6 +109,10 @@ impl TryFrom<XdsTarget> for McpTargetSpec {
 				env: stdio.env,
 			},
 			XdsTarget::Openapi(openapi) => McpTargetSpec::OpenAPI(openapi.try_into()?),
+			XdsTarget::McpProxy(proxy) => McpTargetSpec::McpProxy {
+				cmd: proxy.cmd,
+				args: proxy.args,
+			},
 		};
 		Ok(target)
 	}

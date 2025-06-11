@@ -12,6 +12,7 @@ export interface Target {
   openapi?: OpenAPITarget;
   stdio?: StdioTarget;
   a2a?: A2aTarget;
+  mcp_proxy?: McpProxyTarget;
 }
 
 export type TargetType = "mcp" | "sse" | "openapi" | "stdio" | "a2a" | "unknown";
@@ -191,7 +192,9 @@ export interface Config {
   targets: TargetWithType[];
 }
 
-export type TargetWithType = Target & { type: "mcp" | "a2a" | "openapi" | "stdio" | "sse" };
+export type TargetWithType = Target & {
+  type: "mcp" | "a2a" | "openapi" | "stdio" | "sse" | "mcp_proxy";
+};
 
 // Schema specifically for Playground UI representation, might differ from backend config Listener
 export const PlaygroundListenerSchema = z.object({
@@ -213,4 +216,11 @@ export type PlaygroundListener = z.infer<typeof PlaygroundListenerSchema>;
 // It combines the config Listener with the derived displayEndpoint for UI purposes
 export interface ListenerInfo extends Listener {
   displayEndpoint: string;
+}
+
+export interface McpProxyTarget {
+  // The command of the mcp-proxy.
+  cmd: string;
+  // The arguments for the command to be run by mcp-proxy.
+  args: string[];
 }

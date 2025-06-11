@@ -18,6 +18,7 @@ message Target {
     SseTarget sse = 3;
     OpenAPITarget openapi = 4;
     StdioTarget stdio = 5;
+    McpProxyTarget mcp_proxy = 6;
   }
 
   message Filter {
@@ -45,7 +46,7 @@ message Target {
   // If empty, all resources will be allowed.
   // All filters will be ORed together.
   // If any filter matches, then the resource will not be filtered.
-  repeated Filter filters = 6;
+  repeated Filter filters = 7;
 
 
   message SseTarget {
@@ -90,6 +91,13 @@ message Target {
     agentgateway.dev.common.BackendTls tls = 5;
 
     repeated agentgateway.dev.common.Header headers = 6;
+  }
+
+  message McpProxyTarget {
+    // The command of the mcp-proxy.
+    string cmd = 1;
+    // The arguments for the command to be run by mcp-proxy.
+    repeated string args = 2;
   }
 }
 

@@ -8,7 +8,7 @@ const API_URL = "http://localhost:19000";
 export async function updateTarget(target: Target): Promise<void> {
   try {
     // Check if it's an mcp or a2a target
-    if (target.sse || target.stdio || target.openapi) {
+    if (target.sse || target.stdio || target.openapi || target.mcp_proxy) {
       // remove the type from the target for MCP endpoint
       const mcpTarget = { ...target, type: undefined };
       const response = await fetch(`${API_URL}/targets/mcp`, {
